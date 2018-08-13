@@ -35,14 +35,30 @@ const GetTuWenInfo=(beginDate, endDate)=>{
                  temp=[];
              }
         }
-        
-         //开始处理
+        console.log(result);
+         //开始处理 根据user source进行判断
+         // user source=0  转发数 公众号打开次数
+         // user source= 99999999 图文阅读数
          for (let i = 0; i < result.length; i++) {
              const e = result[i];
-             const date=e[0].ref_date;
-             const gzhReadCount= e[0].int_page_read_count;
-             const fenXiangZhuanFaCount=e[0].share_count;
-             const tuWenReadCount=e[4].int_page_read_count;
+             //e 里面存了 [user source:0] [user source:1][user source:2]...[user source:99999]
+             let date;
+             let gzhReadCount;
+             let fenXiangZhuanFaCount;
+             let tuWenReadCount;
+             e.forEach(p => {
+                 if(p.user_source==0){
+                    date=p.ref_date;
+                    gzhReadCount= p.int_page_read_count;
+                    fenXiangZhuanFaCount=p.share_count;
+                 }
+                 if(p.user_source==99999999){
+                     tuWenReadCount=p.int_page_read_count;
+                 }
+                 if(typeof  tuWenReadCount==='undefined'){
+                    tuWenReadCount="出错了";
+                 }
+             });
              TuWenInfoList.push(new TuWenInfo(gzhReadCount,tuWenReadCount,fenXiangZhuanFaCount,date));
          }
     });
