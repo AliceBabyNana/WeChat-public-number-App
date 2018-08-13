@@ -7,7 +7,7 @@ class UserInfo {
         this.Date = date;        // 日期
     }
 }
-AutoGetUserInfo = () => {
+const AutoGetUserInfo = () => {
     const o = GetStartDateAndEndDate();
     //获取数据
     userInfoList.length = 0;
@@ -15,7 +15,7 @@ AutoGetUserInfo = () => {
     setTimeout(CreateUserInfoTable, 1500);
 }
 //2018-08-16 date格式
-GetUserInfo = (beginDate, endDate) => {
+const GetUserInfo = (beginDate, endDate) => {
     $.getJSON("https://mp.weixin.qq.com/misc/useranalysis",
         {
             begin_date: beginDate,

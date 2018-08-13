@@ -24,7 +24,7 @@ const CreateTable = () => {
 
 
 
-CreateImg = () => {
+const CreateImg = () => {
     const srcArry = [
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534607329301&di=fd5c49a21352feac42080337f64b1a59&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201510%2F17%2F20151017134243_uiw3W.jpeg",
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534607490196&di=befed90b2601077c352d7e2c5e69ee05&imgtype=0&src=http%3A%2F%2Fi1.acgimage.com%2F541950%2Fa26febba7ee54e06.jpg",
@@ -46,14 +46,14 @@ CreateImg = () => {
 
 };
 
-CreateSelectBtn = () => {
+const CreateSelectBtn = () => {
     //创建查询按钮
     $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<hr><button  class='JLFTableBtn btn btn-danger' id='JLFBtnSelect'>查询</button>");
     //绑定点击事件
     $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFBtnSelect']",AutoSelect);
 }
 
-CreateUserInfoTable = () => {
+const CreateUserInfoTable = () => {
     $("#JLFUserInfoTableDiv").remove();
     $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<div id='JLFUserInfoTableDiv'><div class='weui-desktop-panel'><table id='JLFUserInfoTable' class='table table-bordered table-hover'><tr><td colspan='5'>用户分析</td></tr><tr><th>日期</th><th>总粉丝数</th><th>净关注人数</th><th>新增加关注人数</th><th>取消关注人数</th></tr></table></div></div>");
     const $JLFTable = $("#JLFUserInfoTable");
@@ -67,7 +67,7 @@ CreateUserInfoTable = () => {
         </tr>`);
     });
 };
-CreateLiuLiangZhuInfoTable = () => {
+const CreateLiuLiangZhuInfoTable = () => {
     $("#JLFLiuLiangZhuInfoTableDiv").remove();
     $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append(`<div id='JLFLiuLiangZhuInfoTableDiv'><div class='weui-desktop-panel'><table id='JLFLiuLiangZhuInfoTable' class='table table-bordered table-hover'><tr><td colspan='5'>流量主</td></tr><tr><th>日期</th><th>收入</th></tr><tr><td>总收入</td><td>${TotalMoney}</td></tr></table></div></div>`);
     const $JLFTable = $("#JLFLiuLiangZhuInfoTable");
@@ -78,12 +78,26 @@ CreateLiuLiangZhuInfoTable = () => {
         </tr>`);
     });
 };
-
+const CreateTuWenInfoTable=()=>{
+    $("#JLFTuWenInfoTableDiv").remove();
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append(`<div id='JLFTuWenInfoTableDiv'><div class='weui-desktop-panel'><table id='JLFTuWenInfoTable' class='table table-bordered table-hover'><tr><td colspan='5'>图文分析</td></tr><tr><th>日期</th><th>从公众号会话打开(次数)</th><th>分享转发(次数)</th><th>图文页阅读(次数)</th></tr></table></div></div>`);
+    const $JLFTable = $("#JLFTuWenInfoTable");
+    TuWenInfoList.forEach(p => {
+        $JLFTable.append(`<tr>
+        <td>${p.Date}</td>
+        <td>${p.GZHReadCount}</td>
+        <td>${p.FenXiangZhuanFaCount}</td>
+        <td>${p.TuWenReadCount}</td>
+        </tr>`);
+    });
+};
 //所有查询
-AutoSelect=()=>{
+const AutoSelect=()=>{
     AutoGetUserInfo();
     setTimeout(CreateTable, 1500);
+    AutoGetTuWenInfo();
     AutoGetLiuLiangZhu();
+    
 };
 
 
