@@ -4,5 +4,5 @@ Chrome extension
 WeChat background system homepage information statistics (reading quantity, likes quantity)
 ## Method of use
 Add an extension to the app from the chrome browser, and you can see it on the index page of the WeChat public number
-##After using
+## After using
 ![Image text](https://raw.githubusercontent.com/AliceBabyNana/WeChat-public-number-App/master/Demo/afterusing.jpg)
