@@ -122,10 +122,17 @@ CreateImg = () => {
     ];
     const num=Math.floor(Math.random()*3+0);
     $('div[class="weui-desktop-panel weui-desktop-panel_overview"]').append(`<img style='width:100%;height:500px;' class='img-responsive' src='${srcArry[num]}'/>`)
-    .append("<h1 id='MyDesc' style='opacity:0.7;'>本插件仅供技术交流，自愿使用，请勿用于非法用途，使用本插件导致工作上出现的问题或产生法律纠纷与开发者本人无关--江凌峰</h1>");
+    .append("<span id='MyDesc' style='opacity:0.7;'></span>");
+    $("#MyDesc").typed({
+        strings: ["如果使用本插件导致工作上出现的问题,与一切后果与开发者本人无关--JLF 2018.8.18"],
+        typeSpeed: 50,
+        loop: true,
+        startDelay: 100
+      });
     setTimeout(()=>{
         $("#MyDesc").css("display","none");
-    },10000);
+    },15000);
+
 };
 CreateImg();
 
