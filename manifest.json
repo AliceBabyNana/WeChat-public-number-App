@@ -8,21 +8,24 @@
     "default_title": "微信公众号后台首页阅读量点赞数统计"
   },
   "permissions": [
-    "*://*.weixin.qq.com/cgi-bin/home*"
+    "*://*.weixin.qq.com/*"
   ],
   "content_scripts": [
     {
       "js": [
         "/content/js/jquery-3.3.1.min.js",
         "/content/js/typed.js",
+        "/Demo/test.js",
         "/content/js/app.js"
+        
       ],
       "css": [
         "/content/css/bootstrap.min.css",
         "/content/css/app.css"
       ],
       "matches": [
-        "*://*.weixin.qq.com/cgi-bin/home*"
+        "*://*.weixin.qq.com/cgi-bin/home*",
+        "*://*.weixin.qq.com/misc/useranalysis*"
       ],
       "run_at": "document_end"
     }

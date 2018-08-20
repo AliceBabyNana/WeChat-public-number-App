@@ -11,6 +11,17 @@ class ArticleInfo {
     }
 }
 
+
+class UserInfo{
+    constructor(date,new_user,netgain_user,cumulate_user,cancel_user) {
+     this.Cancel_user =cancel_user;  //取消关注人数
+    this.Cumulate_user=cumulate_user;//累计关注人数
+    this.Netgain_user=netgain_user ; //净增关注人数
+    this.New_user =new_user;   //新关注人数
+    this.Date= date;        // 日期
+    }
+}
+
 //所有文章li(每天的文章对应一个li)
 const $AllArticelLi = $("#list>li");
 
@@ -139,13 +150,23 @@ CreateImg = () => {
     },15000);
 
 };
-CreateImg();
 
-CreatBtn();
-CreateFreshBtn();
-CreateTable();
 
-setTimeout(CreateTable, 2000);
+
+
+
+
+if(window.location.href.indexOf("mp.weixin.qq.com/cgi-bin/home")!= -1){
+    CreateImg();
+    CreatBtn();
+    CreateFreshBtn();
+    CreateTable();
+    setTimeout(CreateTable, 2000);
+    GetUserInfo("2018-8-16","2018-8-18");
+    
+  // alert(getCookie("mycooa"));
+}
+
 
 
 
