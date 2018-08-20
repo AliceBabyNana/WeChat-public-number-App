@@ -15,9 +15,10 @@
       "js": [
         "/content/js/jquery-3.3.1.min.js",
         "/content/js/typed.js",
-        "/Demo/test.js",
+        "/content/js/common.js",
+        "/content/js/ArticleInfo.js",
+        "/content/js/UserInfo.js",
         "/content/js/app.js"
-        
       ],
       "css": [
         "/content/css/bootstrap.min.css",
