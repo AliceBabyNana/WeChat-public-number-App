@@ -1,12 +1,13 @@
 //创建一个类 保存每天文章信息
 class ArticleInfo {
     // 构造  
-    constructor(Id, Date, YueDuSum, DianZanSum,Status) {
+    constructor(Id, Date, YueDuSum, DianZanSum,Status,TopReadCount) {
         this.Id = Id;
         this.Date = Date;//发文时间
         this.YueDuSum = YueDuSum;//阅读数
         this.DianZanSum = DianZanSum;//点赞数
-        this.status=Status;//状态
+        this.Status=Status;//状态
+        this.TopReadCount=TopReadCount;
     }
 }
 
@@ -31,8 +32,9 @@ const CreatBtn = () => {
 //创建一张汇总表
 const CreateTable = () => {
     //创建之前先删除
-    $("#JLFTableDiv").remove()
-    $("div[class='weui-desktop-panel weui-desktop-panel_overview']").append("<div id='JLFTableDiv'><div class='weui-desktop-panel'><table id='JLFTable' class='table table-bordered table-hover'><tr><th>编号</th><th>总阅读数</th><th>总点赞数</th><th>发文时间</th><th>发文状态</th></tr></table></div></div>");
+    $("#JLFTableDiv").remove();
+   
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<div id='JLFTableDiv'><div class='weui-desktop-panel'><table id='JLFTable' class='table table-bordered table-hover'><tr><th>编号</th><th>总阅读数</th><th>头条阅读数</th><th>总点赞数</th><th>发文时间</th><th>发文状态</th></tr></table></div></div>");
     const $JLFTable = $("#JLFTable");
     //遍历所有AllArticelLi 获取每天发文的信息，放进数组
     const myArr = [];
@@ -61,18 +63,19 @@ const CreateTable = () => {
         $JLFTable.append(`<tr>
             <td>${o.Id}</td>
             <td>${o.YueDuSum}</td>
+            <td>${o.TopReadCount}</td>
             <td>${o.DianZanSum}</td>
             <td>${o.Date}</td>
-            <td>${o.status}</td>
+            <td>${o.Status}</td>
             </tr>`);
     });
 
 };
 //创建刷新表格按钮
 const CreateFreshBtn = () => {
-    $("div[class='weui-desktop-panel weui-desktop-panel_overview']").append("<hr><button id='JLFFresh'  class='btn btn-danger'>刷新</button>")
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<hr><button id='JLFFresh'  class='btn btn-danger'>刷新</button>")
     //绑定点击事件
-    $("div[class='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFFresh']", function () {
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFFresh']", function () {
         CreateTable();
     });
 };
@@ -93,11 +96,11 @@ const GetArticleInfo = (o, e) => {
     //点赞总数
     let dianzanSum = 0;
     //统计阅读总数
-    $AllArticelLi.eq(dayNum).find("li[class='weui-desktop-mass-media__data appmsg-view']>span").each((i, o) => {
+    $AllArticelLi.eq(dayNum).find("li[class^='weui-desktop-mass-media__data appmsg-view']>span").each((i, o) => {
         yueDuSum += parseInt($.trim($(o).text()));
     });
     //统计点赞总数 weui-desktop-mass-media__data appmsg-like
-    $AllArticelLi.eq(dayNum).find("li[class='weui-desktop-mass-media__data appmsg-like']>span").each((i, o) => {
+    $AllArticelLi.eq(dayNum).find("li[class^='weui-desktop-mass-media__data appmsg-like']>span").each((i, o) => {
         dianzanSum += parseInt($.trim($(o).text()));
     });
     //发文时间
@@ -106,7 +109,9 @@ const GetArticleInfo = (o, e) => {
     const Id = parseInt(dayNum) + 1;
     //该天的状态（已删除,发送完毕）
     const status=$.trim($AllArticelLi.eq(dayNum).find("span[class^='js_status_txt']").text());
-    const articleInfo = new ArticleInfo(Id, time, yueDuSum, dianzanSum,status);
+    //头条阅读数
+    const topReadCount=$.trim($AllArticelLi.eq(dayNum).find("span[class='weui-desktop-mass-media__data__inner']:eq(0)").text());
+    const articleInfo = new ArticleInfo(Id, time, yueDuSum, dianzanSum,status,topReadCount);
     return articleInfo;
 };
 
@@ -121,7 +126,7 @@ CreateImg = () => {
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534607585236&di=1fa51788b5a48f828bdbf59ead7a0a7f&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201508%2F15%2F20150815154941_VYv4P.png"
     ];
     const num=Math.floor(Math.random()*3+0);
-    $('div[class="weui-desktop-panel weui-desktop-panel_overview"]').append(`<img style='width:100%;height:500px;' class='img-responsive' src='${srcArry[num]}'/>`)
+    $('div[class^="weui-desktop-panel weui-desktop-panel_overview"]').append(`<img style='width:100%;height:500px;' class='img-responsive' src='${srcArry[num]}'/>`)
     .append("<span id='MyDesc' style='opacity:0.7;'></span>");
     $("#MyDesc").typed({
         strings: ["如果使用本插件导致工作上出现的问题,与一切后果与开发者本人无关--JLF 2018.8.18"],
@@ -140,7 +145,7 @@ CreatBtn();
 CreateFreshBtn();
 CreateTable();
 
-setTimeout(CreateTable, 2500);
+setTimeout(CreateTable, 2000);
 
 
 
