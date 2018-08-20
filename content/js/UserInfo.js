@@ -25,7 +25,6 @@ AutoGetUserInfo = () => {
 }
 //2018-08-16 date格式
 GetUserInfo = (beginDate, endDate) => {
-    alert("GetUserInfo执行了");
     $.getJSON("https://mp.weixin.qq.com/misc/useranalysis",
         {
             begin_date: beginDate,

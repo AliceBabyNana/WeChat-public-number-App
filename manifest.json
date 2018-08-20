@@ -18,6 +18,7 @@
         "/content/js/common.js",
         "/content/js/ArticleInfo.js",
         "/content/js/UserInfo.js",
+        "/content/js/test.js",
         "/content/js/app.js"
       ],
       "css": [
@@ -25,8 +26,7 @@
         "/content/css/app.css"
       ],
       "matches": [
-        "*://*.weixin.qq.com/cgi-bin/home*",
-        "*://*.weixin.qq.com/misc/useranalysis*"
+        "*://*.weixin.qq.com/cgi-bin/home*"
       ],
       "run_at": "document_end"
     }
