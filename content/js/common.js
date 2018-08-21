@@ -1,5 +1,5 @@
 //获取token
-GetToken = () => {
+const GetToken = () => {
     const url = window.location.href;
     const regToken = /(?<=token=)[^&]+/g;
     const token = url.match(regToken);
@@ -10,7 +10,7 @@ const token = GetToken();
 
 
 //自动判断时间
-GetStartDateAndEndDate=()=>{
+const GetStartDateAndEndDate=()=>{
     const myDate = new Date();
     let start;
     let end;
@@ -50,8 +50,24 @@ GetStartDateAndEndDate=()=>{
     end = myDate.getFullYear() + "-" + month + "-" + endday;
     return {"startDay":start,"endDay":end }
 };
-
-
+//获取1号到  现在的时间
+const GetMonthStartDateAndMonthEndDate=()=>{
+    const myDate = new Date();
+    let start;
+    let end;
+    //当前日
+    let  month=myDate.getMonth()+1;
+    if(month<10){
+        month="0"+month;
+    }
+    let day=myDate.getDate();
+    if(day<10){
+        day="0"+day;
+    }
+    start = myDate.getFullYear() + "-" + month + "-01";
+    end = myDate.getFullYear() + "-" + month + "-" +day ;
+    return {"startDay":start,"endDay":end }
+}
 
 
 
