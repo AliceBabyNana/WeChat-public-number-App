@@ -69,10 +69,6 @@ const GetMonthStartDateAndMonthEndDate=()=>{
     return {"startDay":start,"endDay":end }
 }
 
-
-
-
-
  // myDate.getYear();        //获取当前年份(2位)
     // myDate.getFullYear();    //获取完整的年份(4位,1970-????)
     // myDate.getMonth();       //获取当前月份(0-11,0代表1月)
@@ -86,3 +82,19 @@ const GetMonthStartDateAndMonthEndDate=()=>{
     // myDate.toLocaleDateString();     //获取当前日期
     // var mytime=myDate.toLocaleTimeString();     //获取当前时间
     // myDate.toLocaleString( );        //获取日期与时间
+
+
+    //抖动效果
+    jQuery.fn.shake = function (intShakes /*Amount of shakes*/, intDistance /*Shake distance*/, intDuration /*Time duration*/) {
+        this.each(function () {
+            var jqNode = $(this);
+            jqNode.css({ position: 'relative' });
+            for (var x = 1; x <= intShakes; x++) {
+                jqNode.animate({ left: (intDistance * -1) }, (((intDuration / intShakes) / 4)))
+                .animate({ left: intDistance }, ((intDuration / intShakes) / 2))
+                .animate({ left: 0 }, (((intDuration / intShakes) / 4)));
+            }
+        });
+        return this;
+    }
+    

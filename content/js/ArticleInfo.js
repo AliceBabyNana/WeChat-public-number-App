@@ -22,8 +22,8 @@ const CreatBtn = () => {
     //绑定点击事件  
     $("#list").on("click", "button[class^='JLFBtn']", function () {
         const o = GetArticleInfo(this);
-
-        alert(`总阅读数:${o.YueDuSum}   总点赞数:${o.DianZanSum}`);
+        layer.tips(`总阅读数:${o.YueDuSum}   总点赞数:${o.DianZanSum}`, $(this));
+        //alert(`总阅读数:${o.YueDuSum}   总点赞数:${o.DianZanSum}`);
     });
 };
 //获取一天的文章信息 o: 含有[daynum]属性的button  e:$AllArticelLi li的编号 0开始
