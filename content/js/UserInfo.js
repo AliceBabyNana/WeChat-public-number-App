@@ -7,15 +7,6 @@ class UserInfo {
         this.Date = date;        // 日期
     }
 }
-GetToken = () => {
-    const url = window.location.href;
-    const regToken = /(?<=token=)[^&]+/g;
-    const token = url.match(regToken);
-    return token.toString();
-};
-
-
-
 AutoGetUserInfo = () => {
     const o = GetStartDateAndEndDate();
     //获取数据
@@ -37,13 +28,12 @@ GetUserInfo = (beginDate, endDate) => {
             random: '0.3018668890073837'
         }, function (data) {
             list = data.category_list[0].list;//这就是存放用户信息的列表
-            console.log(list);
             for (let i = 0; i < list.length; i++) {
                 userInfoList.push(new UserInfo(list[i].date, list[i].new_user, list[i].netgain_user, list[i].cumulate_user, list[i].cancel_user));
             }
         });
 };
-const token = GetToken();
+
 const userInfoList = [];//存放用户信息的集合
 
 

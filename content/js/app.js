@@ -21,15 +21,7 @@ const CreateTable = () => {
     });
 
 };
-//创建刷新表格按钮
-const CreateFreshBtn = () => {
-    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<hr><button   id='JLFFresh'  class='btn btn-danger JLFTableBtn'>刷新</button>")
-    //绑定点击事件
-    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFFresh']", function () {
-        CreateTable();
-        AutoGetUserInfo();//此方法内部   把userinfolist 清空 自动创建table
-    });
-};
+
 
 
 CreateImg = () => {
@@ -56,9 +48,9 @@ CreateImg = () => {
 
 CreateSelectBtn = () => {
     //创建查询按钮
-    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<button  class='JLFTableBtn btn btn-danger' id='JLFBtnSelect'>查询</button>");
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<hr><button  class='JLFTableBtn btn btn-danger' id='JLFBtnSelect'>查询</button>");
     //绑定点击事件
-    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFBtnSelect']",AutoGetUserInfo);
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFBtnSelect']",AutoSelect);
 }
 
 CreateUserInfoTable = () => {
@@ -75,17 +67,30 @@ CreateUserInfoTable = () => {
         </tr>`);
     });
 };
+CreateLiuLiangZhuInfoTable = () => {
+    $("#JLFLiuLiangZhuInfoTableDiv").remove();
+    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append(`<div id='JLFLiuLiangZhuInfoTableDiv'><div class='weui-desktop-panel'><table id='JLFLiuLiangZhuInfoTable' class='table table-bordered table-hover'><tr><td colspan='5'>流量主</td></tr><tr><th>日期</th><th>收入</th></tr><tr><td>总收入</td><td>${TotalMoney}</td></tr></table></div></div>`);
+    const $JLFTable = $("#JLFLiuLiangZhuInfoTable");
+    LiuLiangZhuList.forEach(p => {
+        $JLFTable.append(`<tr>
+        <td>${p.Date}</td>
+        <td>${p.Money}</td>
+        </tr>`);
+    });
+};
 
-
-
+//所有查询
+AutoSelect=()=>{
+    AutoGetUserInfo();
+    setTimeout(CreateTable, 1500);
+    AutoGetLiuLiangZhu();
+};
 
 
 if (window.location.href.indexOf("mp.weixin.qq.com/cgi-bin/home") != -1) {
     CreateImg();
     CreatBtn();
-    CreateFreshBtn();
     CreateSelectBtn();
-    setTimeout(CreateTable, 2000);
 }
 
 

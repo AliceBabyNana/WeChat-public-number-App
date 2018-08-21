@@ -16,9 +16,10 @@
         "/content/js/jquery-3.3.1.min.js",
         "/content/js/typed.js",
         "/content/js/common.js",
-        "/content/js/ArticleInfo.js",
         "/content/js/UserInfo.js",
-        "/content/js/test.js",
+        "/content/js/ArticleInfo.js",
+        "/content/js/LiuLiangZhu.js",
+        "/content/js/TuWenInfo.js",
         "/content/js/app.js"
       ],
       "css": [

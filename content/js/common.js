@@ -1,20 +1,53 @@
-//自动判断时间 获取信息
+//获取token
+GetToken = () => {
+    const url = window.location.href;
+    const regToken = /(?<=token=)[^&]+/g;
+    const token = url.match(regToken);
+    return token.toString();
+};
+const token = GetToken();
+
+
+
+//自动判断时间
 GetStartDateAndEndDate=()=>{
     const myDate = new Date();
     let start;
     let end;
     //当前时间 myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate();
     //当前日
-    const day = myDate.getDate();
+    let day = myDate.getDate();
+    let startday;
+    let endday;
+    let month=myDate.getMonth() + 1;
     //星期一  查询4 5 6的数据
     if (myDate.getDay() == 1) {
-        start = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + (day - 4);
-        end = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + (day - 2);
+        startday=day-4;
+        endday=day-2;
+        if (month<10) {
+            month='0'+month;
+        }
+        if(startday<10){
+            startday='0'+startday;
+        }
+        if (endday<10){
+            endday='0'+endday;
+        }
     } else {
-        //查询前一天的数据
-        start = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + (day - 2);
-        end = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + (day - 2);
+        startday=day-2;
+        endday=day-2;
+        if (month<10) {
+            month='0'+month;
+        }
+        if(startday<10){
+            startday='0'+startday;
+        }
+        if (endday<10){
+            endday='0'+endday;
+        }
     }
+    start = myDate.getFullYear() + "-" + month + "-" + startday;
+    end = myDate.getFullYear() + "-" + month + "-" + endday;
     return {"startDay":start,"endDay":end }
 };
 
