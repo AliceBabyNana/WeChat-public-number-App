@@ -70,7 +70,7 @@ const CreateTuWenInfoTable=()=>{
 };
 //所有查询
 const AutoSelect=()=>{
-    layer.msg("0.0做此插件唯一目的就是每天早上做统计的时候偷懒...如果您使用过程中造成了工作上的任何问题与本人无关",{time:"5000"});
+    layer.msg("loading...",{time:"5000"});
     AutoGetUserInfo();
     setTimeout(CreateTable, 1500);
     AutoGetTuWenInfo();
