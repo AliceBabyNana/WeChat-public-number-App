@@ -39,14 +39,13 @@ const GetLiuLiangZhu = (beginDate, endDate) => {
 };
 
 const GetTotalMoney = () => {
-    const o = GetMonthStartDateAndMonthEndDate();
     $.getJSON("https://mp.weixin.qq.com/promotion/publisher/publisher_stat",
         {
             "action": "biz_ads_stat",
             "page": "1",
             "page_size": "10",
-            "start_date": o.startDay,
-            "end_date": o.endDay,
+            "start_date": startDay,
+            "end_date": endDay,
             "slot": "1",
             "token": token,
             "appid": "",
@@ -66,10 +65,9 @@ const GetTotalMoney = () => {
 }
 
 const AutoGetLiuLiangZhu = () => {
-    const o = GetStartDateAndEndDate();
     //获取数据
     LiuLiangZhuList.length = 0;
-    GetLiuLiangZhu(o.startDay, o.endDay);
+    GetLiuLiangZhu(startDay, endDay);
     GetTotalMoney();
     setTimeout(CreateLiuLiangZhuInfoTable, 1500);
 }

@@ -65,9 +65,9 @@ const GetTuWenInfo=(beginDate, endDate)=>{
 };
 
 const AutoGetTuWenInfo = () => {
-    const o = GetStartDateAndEndDate();
+    
     //获取数据
     TuWenInfoList.length = 0;
-    GetTuWenInfo(o.startDay, o.endDay);
+    GetTuWenInfo(startDay, endDay);
     setTimeout(CreateTuWenInfoTable, 1500);
 }

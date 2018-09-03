@@ -8,10 +8,9 @@ class UserInfo {
     }
 }
 const AutoGetUserInfo = () => {
-    const o = GetStartDateAndEndDate();
     //获取数据
     userInfoList.length = 0;
-    GetUserInfo(o.startDay, o.endDay);
+    GetUserInfo(startDay, endDay);
     setTimeout(CreateUserInfoTable, 1500);
 }
 //2018-08-16 date格式

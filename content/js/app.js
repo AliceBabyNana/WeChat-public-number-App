@@ -1,3 +1,14 @@
+// 监听消息
+let startDay;
+let endDay;
+let token;
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    token = GetToken();
+    sendResponse(token);
+    startDay = request.startday;
+    endDay = request.endday;
+    AutoSelect();
+});
 //创建一张汇总表
 const CreateTable = () => {
     //创建之前先删除
@@ -22,13 +33,7 @@ const CreateTable = () => {
 
 };
 
-const CreateSelectBtn = () => {
-    //创建查询按钮
-    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append("<hr><button  class='JLFTableBtn btn btn-danger' id='JLFBtnSelect'>查询</button>");
-    //绑定点击事件
-    $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").on("click", "button[id='JLFBtnSelect']",AutoSelect);
-    $("#JLFBtnSelect").shake(30, 7, 10000);
-}
+
 
 const CreateUserInfoTable = () => {
     $("#JLFUserInfoTableDiv").remove();
@@ -55,7 +60,7 @@ const CreateLiuLiangZhuInfoTable = () => {
         </tr>`);
     });
 };
-const CreateTuWenInfoTable=()=>{
+const CreateTuWenInfoTable = () => {
     $("#JLFTuWenInfoTableDiv").remove();
     $("div[class^='weui-desktop-panel weui-desktop-panel_overview']").append(`<div id='JLFTuWenInfoTableDiv'><div class='weui-desktop-panel'><table id='JLFTuWenInfoTable' class='table table-bordered table-hover'><tr><td colspan='5'>图文分析</td></tr><tr><th>日期</th><th>从公众号会话打开(次数)</th><th>分享转发(次数)</th><th>图文页阅读(次数)</th></tr></table></div></div>`);
     const $JLFTable = $("#JLFTuWenInfoTable");
@@ -69,8 +74,8 @@ const CreateTuWenInfoTable=()=>{
     });
 };
 //所有查询
-const AutoSelect=()=>{
-    layer.msg("loading...",{time:"5000"});
+const AutoSelect = () => {
+    layer.msg("loading...", { time: "5000" });
     AutoGetUserInfo();
     setTimeout(CreateTable, 1500);
     AutoGetTuWenInfo();
@@ -79,7 +84,6 @@ const AutoSelect=()=>{
 
 if (window.location.href.indexOf("mp.weixin.qq.com/cgi-bin/home") != -1) {
     CreatBtn();
-    CreateSelectBtn();
 }
 
 
